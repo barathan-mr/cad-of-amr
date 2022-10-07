@@ -1,0 +1,111 @@
+<?xml version="1.0" ?>
+<robot name="vab" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find vab_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find vab_description)/urdf/vab.trans" />
+<xacro:include filename="$(find vab_description)/urdf/vab.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.002632333476354816 0.008861761059569774 0.07962835240663703" rpy="0 0 0"/>
+    <mass value="4.170931596522656"/>
+    <inertia ixx="0.020024" iyy="0.018144" izz="0.03241" ixy="0.000498" iyz="-0.000311" ixz="-0.001381"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="right_wheel_1">
+  <inertial>
+    <origin xyz="-4.800032930157849e-07 -0.005000092893704761 1.1538031988167496e-07" rpy="0 0 0"/>
+    <mass value="0.3930426933952104"/>
+    <inertia ixx="0.000161" iyy="0.000316" izz="0.000161" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.045023 0.104025 -0.040758" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.045023 0.104025 -0.040758" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/right_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="left_wheel_1">
+  <inertial>
+    <origin xyz="-4.800032932378295e-07 0.004999907106294832 1.1538032092250905e-07" rpy="0 0 0"/>
+    <mass value="0.3930426933952104"/>
+    <inertia ixx="0.000161" iyy="0.000316" izz="0.000161" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.045023 -0.114975 -0.040758" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.045023 -0.114975 -0.040758" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/left_wheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sensor_1">
+  <inertial>
+    <origin xyz="0.0002566541301931777 -0.0009340294741959397 0.019085242132221958" rpy="0 0 0"/>
+    <mass value="1.2800643007904993"/>
+    <inertia ixx="0.000598" iyy="0.000598" izz="0.000847" ixy="-0.0" iyz="1.5e-05" ixz="-4e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.055898 -0.003688 -0.145" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.055898 -0.003688 -0.145" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://vab_description/meshes/sensor_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev10" type="continuous">
+  <origin xyz="-0.045023 -0.104025 0.040758" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rev11" type="continuous">
+  <origin xyz="-0.045023 0.114975 0.040758" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rigid12" type="fixed">
+  <origin xyz="0.055898 0.003688 0.145" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="sensor_1"/>
+</joint>
+
+</robot>

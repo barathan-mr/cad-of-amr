@@ -1,0 +1,23 @@
+<launch>
+
+  <arg name="vab_description" default="false" />
+  <arg name="use_gazebo" default="true" />
+
+
+
+ 
+
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/>
+ 
+
+  <group if="$(arg use_gazebo)">
+      <include file="$(find vab_description)/launch/gazebo.launch"/>
+          <param name="use_sim_time" value="true" />
+  </group>
+  <include file="$(find vab_description)/launch/map_server.launch"/>
+
+  <include file="$(find vab_description)/launch/amcl_only.launch"/>
+
+  <node pkg="rviz" type="rviz" name="rviz"/>
+
+</launch>
